@@ -31,7 +31,7 @@ exports.postCreateCategory = (req, res, next) => {
     }
     if (req.files.length > 0) {
         const categoryImage = req.files.map(file => {
-            return { img: file.filename }
+            return { img: file.location }
         })
         categoryObj.categoryImage = categoryImage;
     }

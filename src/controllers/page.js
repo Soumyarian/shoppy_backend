@@ -5,7 +5,7 @@ exports.createPage = (req, res, next) => {
     if (banners && banners.length > 0) {
         req.body.banners = banners.map((banner, index) => {
             return {
-                img: `/public/${banner.filename}`,
+                img: `/public/${banner.location}`,
                 navigateTo: `/bannerClicked?categoryId=${req.body.category}&type=${req.body.type}`
             }
         })
@@ -13,7 +13,7 @@ exports.createPage = (req, res, next) => {
     if (products && products.length > 0) {
         req.body.products = products.map((product, index) => {
             return {
-                img: `/public/${product.filename}`,
+                img: `/public/${product.location}`,
                 navigateTo: `/productClicked?categoryId=${req.body.category}&type=${req.body.type}`
             }
         })

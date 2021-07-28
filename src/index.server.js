@@ -17,8 +17,8 @@ const orderRoutes = require("./routes/order");
 const adminOrderRoutes = require("./routes/admin/order");
 
 //env variable setup
-env.config();
 app.use(cors());
+env.config();
 app.use(express.json());
 
 app.use('/public', express.static(path.join(__dirname, 'uploads')));

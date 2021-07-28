@@ -11,7 +11,7 @@ exports.postCreateProduct = (req, res, next) => {
     let productPictures = []
     if (req.files.length > 0) {
         productPictures = req.files.map(file => {
-            return { img: file.filename }
+            return { img: file.location }
         })
     }
     const newProduct = new Product({

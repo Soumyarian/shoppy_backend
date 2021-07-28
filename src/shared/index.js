@@ -2,6 +2,8 @@ const jwt = require("jsonwebtoken");
 const multer = require('multer');
 const shortid = require('shortid');
 const path = require('path');
+const multerS3 = require("multer-s3");
+const aws = require("aws-sdk");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -12,7 +14,27 @@ const storage = multer.diskStorage({
     }
 })
 
-exports.upload = multer({ storage: storage })
+
+const s3 = new aws.S3({
+    accessKeyId: 'AKIAXGGZYJJYS4VK6TVG',
+    secretAccessKey: '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',
+});
+
+exports.upload = multer({ storage });
+
+exports.uploadS3 = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: "shoppy-bucket",
+        acl: "public-read",
+        metadata: function (req, file, cb) {
+            cb(null, { fieldName: file.fieldname });
+        },
+        key: function (req, file, cb) {
+            cb(null, shortid.generate() + "-" + file.originalname);
+        },
+    }),
+});
 
 exports.requireSignIn = (req, res, next) => {
     if (req.headers.authorization) {

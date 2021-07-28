@@ -48,7 +48,6 @@ exports.getProductsBySlug = (req, res, next) => {
                         if (error) {
                             return res.status(400).json({ error })
                         }
-                        // if (category.type) {
                         if (products.length > 0) {
                             return res.status(200).json({
                                 products,
@@ -60,9 +59,6 @@ exports.getProductsBySlug = (req, res, next) => {
                                 }
                             })
                         }
-                        // } else {
-                        //     return res.status(200).json({ products: products })
-                        // }
                     })
             }
         })

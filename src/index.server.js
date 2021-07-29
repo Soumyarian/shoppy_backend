@@ -17,11 +17,11 @@ const orderRoutes = require("./routes/order");
 const adminOrderRoutes = require("./routes/admin/order");
 
 //env variable setup
-app.use(cors());
+app.use(cors({ origin: true }));
 env.config();
 app.use(express.json());
 
-app.use('/public', express.static(path.join(__dirname, 'uploads')));
+// app.use('/public', express.static(path.join(__dirname, 'uploads')));
 app.use('/api', userAuthRoutes);
 app.use('/api', adminAuthRoutes);
 app.use('/api', categoryRoute);

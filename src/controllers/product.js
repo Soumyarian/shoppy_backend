@@ -5,7 +5,6 @@ const Category = require('./../models/category');
 
 
 exports.postCreateProduct = (req, res, next) => {
-    // res.status(200).json({ file: req.files, body: req.body });
 
     const { name, price, description, category, quantity } = req.body;
     let productPictures = []

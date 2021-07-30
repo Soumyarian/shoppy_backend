@@ -47,8 +47,8 @@ exports.postSignIn = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .exec(async (error, user) => {
             if (error) return res.status(400).json({ error })
-            const isValidPassword = await user.authenticate(req.body.password);
             if (user) {
+                const isValidPassword = await user.authenticate(req.body.password);
                 if (isValidPassword && user.role === 'admin') {
                     const token = jwt.sign({ _id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: "10h" });
                     const { _id, firstName, lastName, fullName, email, role } = user;
@@ -63,7 +63,7 @@ exports.postSignIn = (req, res, next) => {
                     return res.status(400).json({ message: "Invalid Password" })
                 }
             } else {
-                return res.status(400).json({ message: "something went wrong" })
+                return res.status(400).json({ message: "user does not exist" })
             }
         })
 }
